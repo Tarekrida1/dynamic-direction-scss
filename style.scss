@@ -1,0 +1,28 @@
+@import "direction";
+
+h1 {
+  text-align: direction(left);
+  margin-#{direction(right)}: 1em;
+  padding: direction-sides(1em 2em 3em 4em);
+  border: direction-corners(1em 2em 3em 4em);
+  font-size: direction-if(ltr, 1em, 2em);
+  line-height: direction-if(rtl, 2);
+
+  @include direction-if(ltr) {
+    &::before {
+      content: "left to right";
+    }
+  }
+
+  @include direction-if(rtl) {
+    &::after {
+      content: "right to left";
+    }
+  }
+
+  direction: direction(rtl);
+
+  & > span {
+    direction: direction(ltr);
+  }
+}
